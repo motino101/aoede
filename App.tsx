@@ -5,9 +5,7 @@ import FormPage from './src/pages/FormPage';
 import ChatPage from './src/pages/ChatPage';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
-// import loadFonts from './src/utils/loadfonts'; // Adjust the path as necessary
-
-
+// import loadFonts from './src/utils/loadfonts';
 import { useFonts } from 'expo-font'
 
 
@@ -20,24 +18,10 @@ export default function App() {
     InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
   });
 
-  // useEffect(() => {
-  //   loadFonts().then(() => setFontsLoaded(true));
-  // }, []);
-
-  // if (!fontsLoaded) {
-  //   console.log('Fonts not loaded yet');
-  // }
-
-  useEffect(() => {
-    if (loaded) {
-      // can hide splash screen here
-    }
-  }, [loaded])
-
   if (!loaded) {
     return null;
   }
-  
+
   console.log('Fonts loaded!');
   return (
     <ApplicationProvider {...eva} theme={eva.light}>

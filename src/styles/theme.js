@@ -1,7 +1,12 @@
 // theme.js
 export default {
 
+  size: {
+    bigIcon: 25,
+  },
+
   spacing: {
+    iconTextgap: 10,
     borderWidth: 3,
     bodyWidth: 330,
     gap: 30,
