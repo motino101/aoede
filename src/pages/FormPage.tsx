@@ -61,7 +61,7 @@ export default function FormPage({ navigation }) {
                     </View>
                 </YStack>
                 <YStack>
-                    <Button themeInverse color="#fff" size="$5"  onPress={handleSubmit}>Start Chat</Button>
+                    <Button size="$5" onPress={handleSubmit}>Start Chat</Button>
                 </YStack>
             </View>
 
