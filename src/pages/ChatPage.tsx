@@ -3,7 +3,8 @@ import {
   Text,
   View,
   TextInput,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
@@ -80,19 +81,17 @@ export default function ChatPage({ navigation }) {
   return (
     <TamaguiProvider config={config}>
       <XStack style={styles.header}>
-        <XStack style={{justifyContent: "center", alignItems: "center"}}>
-        <View style={styles.headerIcon}>
-          <Icon name="arrow-back" size={theme.size.bigIcon} color="white" onPress={() => {
-            console.log('Icon pressed');
-            console.log('Navigation prop:', navigation);
-            navigation.goBack()
-            }
-            } />
-        </View>
-        <XStack style={styles.headerText}>
-          <View><Image source={require('../../assets/images/pizza.png')} style={{ width: 28, height: 32 }}></Image></View>
-          <H3 color={'white'}>Ordering Food</H3>
-        </XStack>
+        <XStack style={{ justifyContent: "center", alignItems: "center" }}>
+        <View>
+  <TouchableOpacity onPress={() => {navigation.goBack()}}>
+    <Icon name="arrow-back" size={theme.size.bigIcon} color="white" />
+  </TouchableOpacity>
+</View>
+          
+          <XStack style={styles.headerText}>
+            <View><Image source={require('../../assets/images/pizza.png')} style={{ width: 28, height: 32 }}></Image></View>
+            <H3 color={'white'}>Ordering Food</H3>
+          </XStack>
         </XStack>
       </XStack>
       <GiftedChat
@@ -131,6 +130,7 @@ const styles = StyleSheet.create({
   headerText: {
     justifyContent: 'center',
     flex: 1,
+    marginRight: theme.spacing.gap,
     // backgroundColor: theme.colors.white,
     gap: theme.spacing.iconTextgap,
     alignItems: 'center',
