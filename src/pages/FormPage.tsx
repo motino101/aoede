@@ -36,11 +36,9 @@ export default function FormPage({ navigation }) {
         <TamaguiProvider config={config}>
             <View style={styles.container}>
                 <YStack style={styles.innerContainer}>
-                    <Image source={require('../../assets/images/aidi.png')} style={{ width: 123, height: 130 }}
-                    />
+                    <Image source={require('../../assets/images/aidi.png')} style={{ width: 123, height: 130 }}/>
                     {/* PREFERENCES */}
-                    <View style={styles.speechbubble}>
-                        <View style={styles.speechBubbleTail}></View>
+                    <View>
                         <View style={styles.preferences}>
                             {/*  */}
                             <XStack style={styles.preference}>
@@ -77,45 +75,22 @@ export default function FormPage({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Theme.colors.main,
+        backgroundColor: Theme.colors.white,
         justifyContent: 'space-between',
         padding: Theme.spacing.bottomGap,
     } as ViewStyle,
 
     innerContainer: {
         ...Theme.spacing.centered,
-        // backgroundColor: "#fdf",
+        backgroundColor: "#fdf",
         gap: Theme.spacing.gap,
         flex: 1,
     } as ViewStyle,
 
     preferences: {
         ...Theme.spacing.centered,
+        backgroundColor: "blue",
     } as ViewStyle,
-
-    speechbubble: {
-        // borderWidth: Theme.spacing.borderWidth,
-        // width: Theme.spacing.bodyWidth + Theme.spacing.gap,
-        // borderRadius: Theme.spacing.cardBorderRadius,
-        // position: 'relative', // Position relative to allow absolute positioning of the tail
-        // borderColor: Theme.colors.dark,
-    },
-
-    // Style for the speech bubble tail
-    speechBubbleTail: {
-        // position: 'absolute',
-        // bottom: 10,
-        // left: (Theme.spacing.bodyWidth) / 2,
-        // top: -20,
-        // width: 0,
-        // height: 0,
-        // borderLeftWidth: 10,
-        // borderRightWidth: 10,
-        // borderBottomWidth: 20,
-        // borderLeftColor: 'transparent',
-        // borderRightColor: 'transparent',
-        // borderBottomColor: Theme.colors.dark,
-    },
 
     preference: {
         width: Theme.spacing.bodyWidth,
