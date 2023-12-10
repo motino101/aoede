@@ -17,8 +17,11 @@ import {
 } from 'tamagui'
 import config from '../../tamagui.config'
 import CustomBubble from '../components/bubble';
+import CustomInputToolbar from '../components/inputToolbar';
 import theme from '../styles/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import CustomSend from '../components/send';
+import CustomComposer from '../components/composer';
 
 
 // __________________________________ MAIN APP __________________________________ 
@@ -36,7 +39,7 @@ export default function ChatPage({ navigation }) {
       // },
       {
         _id: 1,
-        text: 'Hi! Start chatting with Ade.',
+        text: 'Start chatting with Ade.',
         createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
         system: true,
       }
@@ -82,26 +85,32 @@ export default function ChatPage({ navigation }) {
     <TamaguiProvider config={config}>
       <XStack style={styles.header}>
         <XStack style={{ justifyContent: "center", alignItems: "center" }}>
-        <View>
-  <TouchableOpacity onPress={() => {navigation.goBack()}}>
-    <Icon name="arrow-back" size={theme.size.bigIcon} color="white" />
-  </TouchableOpacity>
-</View>
-          
+          <View>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Icon name="arrow-back" size={theme.size.bigIcon} color="white" />
+            </TouchableOpacity>
+          </View>
+
           <XStack style={styles.headerText}>
             <View><Image source={require('../../assets/images/pizza.png')} style={{ width: 28, height: 32 }}></Image></View>
             <H3 color={'white'}>Ordering Food</H3>
           </XStack>
         </XStack>
       </XStack>
-      <GiftedChat
-        messages={messages}
-        onSend={messages => onSend(messages)}
-        user={{
-          _id: 1,
-        }}
-        renderBubble={(bubbleProps) => <CustomBubble {...bubbleProps} />}
-      />
+      <View style={{ flex: 1, marginBottom: theme.spacing.gap, backgroundColor: theme.colors.white}}>
+        <GiftedChat
+          messages={messages}
+          onSend={messages => onSend(messages)}
+          user={{
+            _id: 1,
+          }}
+          renderInputToolbar={props => <CustomInputToolbar {...props} />}
+          renderBubble={(bubbleProps) => <CustomBubble {...bubbleProps} />}
+          renderSend={(Props) => <CustomSend {...Props} />}
+          renderComposer={props => <CustomComposer {...props} />}
+
+        />
+      </View>
     </TamaguiProvider>
   );
 }
@@ -118,19 +127,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    paddingHorizontal: theme.spacing.gap,
     position: 'relative'
   },
 
   headerIcon: {
     position: 'absolute',
-    left: 10
   },
 
   headerText: {
     justifyContent: 'center',
     flex: 1,
-    marginRight: theme.spacing.gap,
+    marginRight: theme.spacing.gap + 10,
     // backgroundColor: theme.colors.white,
     gap: theme.spacing.iconTextgap,
     alignItems: 'center',

@@ -6,7 +6,6 @@ import config from '../../tamagui.config'
 import { SelectItem } from '../components/selectItem';
 import { createStackNavigator } from '@react-navigation/stack';
 import Theme from '../styles/theme';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const Stack = createStackNavigator();

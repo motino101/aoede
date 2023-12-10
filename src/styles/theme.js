@@ -3,10 +3,11 @@ export default {
 
   size: {
     bigIcon: 25,
+    medIcon: 22,
   },
 
   spacing: {
-    iconTextgap: 10,
+    iconTextgap: 15,
     borderWidth: 3,
     bodyWidth: 330,
     gap: 30,
@@ -16,6 +17,11 @@ export default {
       alignItems: "center",
       justifyContent: "center",
     },
+
+    chat: {
+      bubbleBorderRadius: 25,
+      bubblePadding: 10,
+    }
   },
   colors: {
     background: "#fff",

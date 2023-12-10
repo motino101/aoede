@@ -1,7 +1,7 @@
 export const BOT_PROFILE = {
     _id: 2,
     name: 'FAQ Bot',
-    avatar: 'https://placeimg.com/140/140/any',
+    avatar: './assets/images/aidi.png',
 }
 
 export const languages = [
