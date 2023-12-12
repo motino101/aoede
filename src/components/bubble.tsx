@@ -10,8 +10,9 @@ const CustomBubble = (props) => {
       {...props}
       wrapperStyle={{
         left: {
-          backgroundColor: theme.colors.main, // Custom background color for left bubble
-          marginRight: 60,
+          backgroundColor: theme.colors.input, // Custom background color for right bubble
+          padding: theme.spacing.chat.bubblePadding,
+          borderRadius: theme.spacing.chat.bubbleBorderRadius,
           marginHorizontal: 5,
         },
         right: {
@@ -21,13 +22,6 @@ const CustomBubble = (props) => {
           marginHorizontal: 5,
         },
       }}
-      // renderMessageText={(messageProps) => (
-      //   <XStack>
-          
-      //     <Text>{messageProps.currentMessage.text}</Text>
-      //     <Icon name="arrow-back" size={theme.size.bigIcon} color="white" />
-      //   </XStack>
-      // )}
     />
   );
 };

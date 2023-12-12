@@ -8,7 +8,7 @@ import unittest
 app = Flask(__name__)
 CORS(app)
 
-openai.api_key = "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" # CHANGE!
+openai.api_key = "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" # CHANGE!
 
 # set conversation history
 conversation_history = []

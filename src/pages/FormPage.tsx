@@ -1,6 +1,6 @@
 import { StyleSheet, View, Image, ViewStyle } from 'react-native';
 import React, { useState } from 'react';
-import { languages, levels } from '../constants/settings';
+import { languages, levels, scenarios } from '../constants/settings';
 import { TamaguiProvider, Label, Button, TextArea, XStack, YStack } from 'tamagui'
 import config from '../../tamagui.config'
 import { SelectItem } from '../components/selectItem';
@@ -19,7 +19,7 @@ export default function FormPage({ navigation }) {
     // Submit form
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("scenario is: ", scenario);
+        console.log("Client submitted scenario to backend: ", scenario);
         // Post to backend
         fetch('http://127.0.0.1:5000/submitForm', {
             method: 'POST',
@@ -43,7 +43,7 @@ export default function FormPage({ navigation }) {
                             {/*  */}
                             <XStack style={styles.preference}>
                                 {/* <Label> Language </Label> */}
-                                <SelectItem native items={languages} id="scen" placeholder="Select simulation" onValueChange={(val) => setScenario(val)} />
+                                <SelectItem native items={scenarios} id="scen" placeholder="Select simulation" onValueChange={(val) => setScenario(val)} />
                             </XStack>
 
                             <XStack style={styles.preference}>
