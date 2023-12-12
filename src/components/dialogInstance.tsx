@@ -26,14 +26,18 @@ import { useState } from 'react'
 
 // import { SelectDemoItem } from './SelectDemo' 
 export function DialogDemo({
-    title,
+    title, type,
     subtitleBottom, subtitleTop,
     bubbleTextTop, bubbleTextBottom,
     bubbleColorTop, bubbleColorBottom,
     textColorTop, textColorBottom,
+    clickFunction, message, // function that runs if icon is clicked, and message to be analyzed by function
 }) {
 
     const [open, setOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
+    
+   
     return (
 
         <Dialog
@@ -44,32 +48,28 @@ export function DialogDemo({
         >
 
             <Dialog.Trigger asChild>
-                <TouchableOpacity onPress={() => {}}>
-                    <Icon name="analytics-outline" size={20} color="white" />
+                <TouchableOpacity onPress={(message) => clickFunction(message)} >
+                    {type === 'right' ? (
+                        <Icon name="analytics-outline" size={20} color="white"/>
+                    ) : (
+                        <Icon name="another-icon" size={20} color="white" />
+                    )}
                     {/* <Sparkle size={theme.size.medIcon} color="white"/> */}
                 </TouchableOpacity>
             </Dialog.Trigger>
             <Adapt when="sm" platform="touch">
-
                 <Sheet animation="medium" zIndex={200000} modal dismissOnSnapToBottom>
-
                     <Sheet.Frame padding="$4" gap="$4">
-
                         <Adapt.Contents />
-
                     </Sheet.Frame>
-
                     <Sheet.Overlay
                         animation="lazy"
                         enterStyle={{ opacity: 0 }}
                         exitStyle={{ opacity: 0 }}
                     />
-
                 </Sheet>
-
             </Adapt>
             <Dialog.Portal>
-
                 <Dialog.Overlay
                     key="overlay"
                     animation="quick"
@@ -77,6 +77,7 @@ export function DialogDemo({
                     enterStyle={{ opacity: 0 }}
                     exitStyle={{ opacity: 0 }}
                 />
+                {/* THIS IS THE DISPLAYED CONTENT */}
                 <Dialog.Content
                     bordered
                     elevate
@@ -94,7 +95,6 @@ export function DialogDemo({
                     exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
                     gap="$4"
                 >
-
                     <Dialog.Title>{title}</Dialog.Title>
                     <YStack style={{gap: 10}}>
                     <H6 style={{marginLeft: 5}}>{subtitleTop}</H6>

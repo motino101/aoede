@@ -4,11 +4,12 @@ import openai
 from flask import Response
 import json
 import unittest
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-openai.api_key = "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" # CHANGE!
+openai.api_key = "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"
 
 # set conversation history
 conversation_history = []

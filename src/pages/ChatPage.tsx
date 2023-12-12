@@ -85,18 +85,31 @@ export default function ChatPage({ navigation }) {
       });
   }, []);
 
-  // API ENDPOINT 3: Analyze message input
-  // must pass this function to renderTime -> when clicking button
-  const analyzeMessage = useCallback((message) => {
-    console.log("message is: ", message);
-    fetch('http://127.0.0.1:5000/analyze', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ message }),
-    })
-  }, []);
+  // API ENDPOINT 3: Translate message input
+  async function analyzeText(message) {
+    setLoading(true);
+    
+    try {
+      const response = await fetch('http://127.0.0.1:5000/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Response failed with status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (Error) {
+      console.log('There was a problem analyzing text ', Error);
+    }
+    
+  }
+  
 
   // __________________________________ RENDER FORM PAGE __________________________________ 
   return (
@@ -135,6 +148,8 @@ export default function ChatPage({ navigation }) {
           renderTime={(timeProps) => 
           <RenderTime {...timeProps}
             title="Analysis"
+            clickFuncL={analyzeText} // function called if icon clicked of left message
+            clickFuncR={analyzeText} // function called if icon clicked of right message
             subtitleTop="Your message"
             subtitleBottom="Analysis"
             bubbleTextTop="This is the text to analyze"
