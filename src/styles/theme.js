@@ -13,6 +13,7 @@ export default {
     gap: 30,
     bottomGap: 40,
     cardBorderRadius: 20,
+    cardPadding: 20,
     centered: {
       alignItems: "center",
       justifyContent: "center",

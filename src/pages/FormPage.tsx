@@ -51,15 +51,22 @@ export default function FormPage({ navigation }) {
                                 <SelectItem native items={languages} id="lang" placeholder="Select language" onValueChange={(val) => setLanguage(val)} />
 
                             </XStack>
-                            <YStack style={styles.preference}>
+                            <XStack style={styles.preference}>
                                 {/* <Label> Proficiency Level </Label> */}
-                                <SelectItem items={levels} id="lev" placeholder="Select level" onValueChange={(val) => setLevel(val)} />
-                            </YStack>
+                                <SelectItem native items={levels} id="lev" placeholder="Select level" onValueChange={(val) => setLevel(val)} />
+                            </XStack>
                         </View>
                     </View>
                 </YStack>
                 <YStack>
-                    <Button size="$5" onPress={handleSubmit}>Start Chat</Button>
+                    <Button size="$5"
+                    // active={{ backgroundColor: 'white' }}
+                    // color="white"
+                    themeInverse={true}
+                    backgroundColor={'black'}
+                    onPress={handleSubmit}>
+                        Start Chat
+                    </Button>
                 </YStack>
             </View>
 
@@ -75,25 +82,25 @@ export default function FormPage({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Theme.colors.white,
+        backgroundColor: Theme.colors.main,
         justifyContent: 'space-between',
         padding: Theme.spacing.bottomGap,
     } as ViewStyle,
 
     innerContainer: {
         ...Theme.spacing.centered,
-        backgroundColor: "#fdf",
+        // backgroundColor: "#fdf",
         gap: Theme.spacing.gap,
         flex: 1,
     } as ViewStyle,
 
     preferences: {
         ...Theme.spacing.centered,
-        backgroundColor: "blue",
+        // backgroundColor: "blue",
     } as ViewStyle,
 
     preference: {
-        width: Theme.spacing.bodyWidth,
+        // width: Theme.spacing.bodyWidth,
         justifyContent: 'center',
         marginVertical: 10,
     },
