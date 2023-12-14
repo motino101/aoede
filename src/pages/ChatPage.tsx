@@ -49,8 +49,6 @@ export default function ChatPage({ navigation }) {
     ])
   }, [])
 
-  
-
   // API ENDPOINT 2: Send new messages to the chat
   const onSend = useCallback((messages = []) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
@@ -85,17 +83,39 @@ export default function ChatPage({ navigation }) {
       });
   }, []);
 
-  // API ENDPOINT 3: Translate message input
-  async function analyzeText(message) {
-    setLoading(true);
-    
+  // API ENDPOINT 4: Translate message - only return output
+  async function translateText(msg) {
+    console.log("TranslateText entered. Input: ", msg)
+    try {
+      const response = await fetch('http://127.0.0.1:5000/translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({msg: msg}),
+      });
+      
+      if (!response.ok){throw new Error(`Response failed with status: ${response.status}`);}
+      const data = await response.json();
+      console.log("response is: ", data);
+      return data;
+    } catch (Error){
+      console.log('There was a problem analyzing text ', Error);
+    }
+
+
+  }
+
+  // API ENDPOINT 3: Translate message input - only return output
+  async function analyzeText(msg) {
+    console.log("message is: ", msg);
     try {
       const response = await fetch('http://127.0.0.1:5000/analyze', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ msg: msg }),
       });
 
       if (!response.ok) {
@@ -110,7 +130,25 @@ export default function ChatPage({ navigation }) {
     
   }
   
+  // API ENDPOINT 5: Summarise conversation history - only return output
+  async function summarise(){
+    console.log("Summarise text entered. Input is conversation history.")
+    try {
+      const response = await fetch('http://127.0.0.1:5000/summarise', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
+      if (!response.ok) {throw new Error(`Response failed with status: ${response.status}`)}
+
+      const data = await response.json();
+      return data;
+    } catch(Error) {
+      console.log('There was a problem analyzing text ', Error);
+    }
+  }
   // __________________________________ RENDER FORM PAGE __________________________________ 
   return (
     <TamaguiProvider config={config}>
@@ -127,7 +165,11 @@ export default function ChatPage({ navigation }) {
           <XStack style={styles.headerText}>
             <View><Image source={require('../../assets/images/pizza.png')} style={{ width: 28, height: 32 }}></Image></View>
             <H3 color={'white'}>Ordering Food</H3>
+            
           </XStack>
+          <TouchableOpacity onPress={() => summarise()}>
+          <Icon name="star" size={20} color="white" />
+          </TouchableOpacity>
         </XStack>
       </XStack>
 
@@ -147,17 +189,8 @@ export default function ChatPage({ navigation }) {
           // NOTE: Pass in analysis message and response to RenderTime
           renderTime={(timeProps) => 
           <RenderTime {...timeProps}
-            title="Analysis"
-            clickFuncL={analyzeText} // function called if icon clicked of left message
+            clickFuncL={translateText} // function called if icon clicked of left message
             clickFuncR={analyzeText} // function called if icon clicked of right message
-            subtitleTop="Your message"
-            subtitleBottom="Analysis"
-            bubbleTextTop="This is the text to analyze"
-            bubbleTextBottom="This is the analysis response."
-            bubbleColorTop={theme.colors.main}
-            textColorTop={theme.colors.white}
-            textColorBottom={theme.colors.white}
-            bubbleColorBottom={theme.colors.dark}
             />}
         />
       </View>
@@ -188,7 +221,7 @@ const styles = StyleSheet.create({
   headerText: {
     justifyContent: 'center',
     flex: 1,
-    marginRight: theme.spacing.gap + 10,
+    marginRight:10,
     // backgroundColor: theme.colors.white,
     gap: theme.spacing.iconTextgap,
     alignItems: 'center',

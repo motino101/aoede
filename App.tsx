@@ -24,7 +24,7 @@ export default function App() {
 
   console.log('Fonts loaded!');
   return (
-    <ApplicationProvider {...eva} theme={eva.light}>
+    
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Form" screenOptions={{
           headerShown: false,
@@ -33,7 +33,6 @@ export default function App() {
         <Stack.Screen name="ChatPage" component={ChatPage} />
       </Stack.Navigator>
     </NavigationContainer>
-  </ApplicationProvider>
     
   )
 }

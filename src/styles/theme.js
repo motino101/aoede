@@ -7,7 +7,7 @@ export default {
   },
 
   spacing: {
-    iconTextgap: 15,
+    iconTextgap: 10,
     borderWidth: 3,
     bodyWidth: 330,
     gap: 30,

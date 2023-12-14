@@ -26,7 +26,11 @@ export default function FormPage({ navigation }) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ scenario, language, level }),
+            body: JSON.stringify({
+                scenario: scenario,
+                language: language,
+                level: level,
+            }),
         })
         navigation.navigate('ChatPage');
     }

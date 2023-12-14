@@ -13,12 +13,12 @@ import {
     XStack,
     Card,
     TextArea,
-    H6,H5, YStack,
+    H6, H5, YStack,
 
 } from 'tamagui'
 import theme from "../styles/theme";
 import Icon from 'react-native-vector-icons/Ionicons';
-import { X, Sparkle, } from '@tamagui/lucide-icons'
+import { X, Sparkle, TextCursor } from '@tamagui/lucide-icons'
 import { TouchableOpacity } from 'react-native';
 import PaddedBox from "./paddedBox";
 import { useState } from 'react'
@@ -28,16 +28,32 @@ import { useState } from 'react'
 export function DialogDemo({
     title, type,
     subtitleBottom, subtitleTop,
-    bubbleTextTop, bubbleTextBottom,
     bubbleColorTop, bubbleColorBottom,
     textColorTop, textColorBottom,
     clickFunction, message, // function that runs if icon is clicked, and message to be analyzed by function
 }) {
 
-    const [open, setOpen] = useState(false)
-    const [loading, setLoading] = useState(false)
-    
-   
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [analyzedText, setAnalyzedText] = useState('');
+
+
+    const onClick = async () => {
+        setLoading(true);
+        console.log("message: hi2", message);
+        try {
+            const result = await clickFunction({ msg: message });
+            console.log("result:", result);
+            setAnalyzedText(result.analysis.trim()); // Assuming result.analysis contains the text you need
+        } catch (error) {
+            console.error('Error in clickFunction:', error);
+            // Optionally handle the error state here
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     return (
 
         <Dialog
@@ -48,11 +64,11 @@ export function DialogDemo({
         >
 
             <Dialog.Trigger asChild>
-                <TouchableOpacity onPress={(message) => clickFunction(message)} >
+                <TouchableOpacity onPress={() => onClick()} >
                     {type === 'right' ? (
-                        <Icon name="analytics-outline" size={20} color="white"/>
+                        <Icon name="analytics-outline" size={20} color="white" />
                     ) : (
-                        <Icon name="another-icon" size={20} color="white" />
+                        <Icon name="text-outline" size={20} color="white" />
                     )}
                     {/* <Sparkle size={theme.size.medIcon} color="white"/> */}
                 </TouchableOpacity>
@@ -96,14 +112,21 @@ export function DialogDemo({
                     gap="$4"
                 >
                     <Dialog.Title>{title}</Dialog.Title>
-                    <YStack style={{gap: 10}}>
-                    <H6 style={{marginLeft: 5}}>{subtitleTop}</H6>
-                    <PaddedBox text={bubbleTextTop} backgroundColor={bubbleColorTop} textColor={textColorTop}/>
-                    </YStack>
-                    <YStack style={{gap: 10}}>
-                        <H6 style={{marginLeft: 5}}>{subtitleBottom}</H6>
-                        <PaddedBox text={bubbleTextBottom} backgroundColor={bubbleColorBottom} textColor={textColorBottom}/>
-                    </YStack>
+
+                    {loading ? (
+                        <H5 style={{ gap: 10 }}>Loading...</H5>
+                    ) : (
+                        <YStack style={{ gap: 10 }}>
+                            <YStack style={{ gap: 10 }}>
+                                <H6 style={{ marginLeft: 5 }}>{subtitleTop}</H6>
+                                <PaddedBox text={message} backgroundColor={bubbleColorTop} textColor={textColorTop} />
+                            </YStack>
+                            <YStack style={{ gap: 10 }}>
+                                <H6 style={{ marginLeft: 5 }}>{subtitleBottom}</H6>
+                                <PaddedBox text={analyzedText} backgroundColor={bubbleColorBottom} textColor={textColorBottom} />
+                            </YStack>
+                        </YStack>
+                    )}
                     <Unspaced>
                         <Dialog.Close asChild>
                             {/* <Button
