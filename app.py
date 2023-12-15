@@ -7,10 +7,12 @@ import unittest
 import os
 from dotenv import load_dotenv
 
+
 app = Flask(__name__)
 CORS(app)
 
 load_dotenv()
+print(os.environ)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # set conversation history and global vars

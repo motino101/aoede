@@ -1,24 +1,12 @@
-import { MessageText } from "react-native-gifted-chat";
 import {
     Adapt,
-    Button,
     Dialog,
-    Fieldset,
-    Input,
-    Label,
-    Paragraph,
     Sheet,
-    TooltipSimple,
     Unspaced,
-    XStack,
-    Card,
-    TextArea,
     H6, H5, YStack,
 
 } from 'tamagui'
-import theme from "../styles/theme";
 import Icon from 'react-native-vector-icons/Ionicons';
-import { X, Sparkle, TextCursor } from '@tamagui/lucide-icons'
 import { TouchableOpacity } from 'react-native';
 import PaddedBox from "./paddedBox";
 import { useState } from 'react'
