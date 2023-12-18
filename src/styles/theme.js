@@ -27,11 +27,12 @@ export default {
   colors: {
     background: "#fff",
     dark: "#14142B",
-    main: "#610BEF",
+    main: "#f7aee2",
     input: "#EFF0F6",
     label: "#6E7191",
     white: "#fff",
     accent1: "#4700AB",
     accent2: "#0041AC",
+    accentLight: "#FFFFFF", // Add a value here
   },
 };

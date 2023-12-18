@@ -24,22 +24,23 @@ import CustomSend from '../components/send';
 import CustomComposer from '../components/composer';
 import CustomMessageText from '../components/MessageText';
 import RenderTime from '../components/renderTime';
+import SummaryDialogue from '../components/summaryDialog';
 
 
 // __________________________________ MAIN APP __________________________________ 
-export default function ChatPage({ navigation }) {
+export default function ChatPage({ navigation, route }) {
   const [messages, setMessages] = useState([])
-  const [loading, setLoading] = useState(true);
+  function capitalizeFirstLetters(str) {
+    return str.split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  }
+
+  const pageTitle = capitalizeFirstLetters(route.params.pageTitle);
 
   // Set initial messages
   useEffect(() => {
     setMessages([
-      // {
-      //   _id: 2,
-      //   text: 'Hello developer',
-      //   createdAt: new Date(),
-      //   user: BOT_PROFILE
-      // },
       {
         _id: 1,
         text: 'Start chatting with Ade.',
@@ -83,72 +84,6 @@ export default function ChatPage({ navigation }) {
       });
   }, []);
 
-  // API ENDPOINT 4: Translate message - only return output
-  async function translateText(msg) {
-    console.log("TranslateText entered. Input: ", msg)
-    try {
-      const response = await fetch('http://127.0.0.1:5000/translate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({msg: msg}),
-      });
-      
-      if (!response.ok){throw new Error(`Response failed with status: ${response.status}`);}
-      const data = await response.json();
-      console.log("response is: ", data);
-      return data;
-    } catch (Error){
-      console.log('There was a problem analyzing text ', Error);
-    }
-
-
-  }
-
-  // API ENDPOINT 3: Translate message input - only return output
-  async function analyzeText(msg) {
-    console.log("message is: ", msg);
-    try {
-      const response = await fetch('http://127.0.0.1:5000/analyze', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ msg: msg }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Response failed with status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (Error) {
-      console.log('There was a problem analyzing text ', Error);
-    }
-    
-  }
-  
-  // API ENDPOINT 5: Summarise conversation history - only return output
-  async function summarise(){
-    console.log("Summarise text entered. Input is conversation history.")
-    try {
-      const response = await fetch('http://127.0.0.1:5000/summarise', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {throw new Error(`Response failed with status: ${response.status}`)}
-
-      const data = await response.json();
-      return data;
-    } catch(Error) {
-      console.log('There was a problem analyzing text ', Error);
-    }
-  }
   // __________________________________ RENDER FORM PAGE __________________________________ 
   return (
     <TamaguiProvider config={config}>
@@ -164,17 +99,15 @@ export default function ChatPage({ navigation }) {
 
           <XStack style={styles.headerText}>
             <View><Image source={require('../../assets/images/pizza.png')} style={{ width: 28, height: 32 }}></Image></View>
-            <H3 color={'white'}>Ordering Food</H3>
-            
+            <H3 color={'white'}>{pageTitle}</H3>
+
           </XStack>
-          <TouchableOpacity onPress={() => summarise()}>
-          <Icon name="star" size={20} color="white" />
-          </TouchableOpacity>
+          <SummaryDialogue />
         </XStack>
       </XStack>
 
       {/* GIFTEDCHAT */}
-      <View style={{ flex: 1, marginBottom: theme.spacing.gap, backgroundColor: theme.colors.white}}>
+      <View style={{ flex: 1, marginBottom: theme.spacing.gap, backgroundColor: theme.colors.white }}>
         <GiftedChat
           messages={messages}
           onSend={messages => onSend(messages)}
@@ -187,10 +120,8 @@ export default function ChatPage({ navigation }) {
           renderComposer={props => <CustomComposer {...props} />}
           renderMessageText={(messageProps) => <CustomMessageText {...messageProps} />}
           // NOTE: Pass in analysis message and response to RenderTime
-          renderTime={(timeProps) => 
-          <RenderTime {...timeProps}
-            clickFuncL={translateText} // function called if icon clicked of left message
-            clickFuncR={analyzeText} // function called if icon clicked of right message
+          renderTime={(timeProps) =>
+            <RenderTime {...timeProps}
             />}
         />
       </View>
@@ -221,7 +152,7 @@ const styles = StyleSheet.create({
   headerText: {
     justifyContent: 'center',
     flex: 1,
-    marginRight:10,
+    marginRight: 10,
     // backgroundColor: theme.colors.white,
     gap: theme.spacing.iconTextgap,
     alignItems: 'center',
