@@ -75,7 +75,7 @@ export default function FormPage({ navigation }) {
     return (
         <TamaguiProvider config={config}>
             <LinearGradient
-                colors={['#F7ADDF', '#BEF1FC',]}
+                colors={['#F7ADDF', '#BED7FC',]}
                 start={{ x: 1, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={{ flex: 1 }}
