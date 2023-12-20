@@ -10,6 +10,7 @@ import LoginPage from './src/pages/LoginPage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useFonts } from 'expo-font'
 import { Ionicons } from '@expo/vector-icons';
+import { LoginPages } from './src/pages/LoginPages';
 import { Theme } from 'tamagui';
 import theme from './src/styles/theme';
 import {RegisterEmailPage, RegisterNamePage, RegisterPasswordPage} from './src/pages/RegisterPages';
@@ -53,6 +54,7 @@ export default function App() {
               <Stack.Screen name="RegisterNamePage" component={RegisterNamePage} />
               <Stack.Screen name="RegisterEmailPage" component={RegisterEmailPage} />
               <Stack.Screen name="RegisterPasswordPage" component={RegisterPasswordPage} />
+              <Stack.Screen name="LoginPages" component={LoginPages} />
             </Stack.Navigator>
           </NavigationContainer>
         )

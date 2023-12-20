@@ -49,7 +49,8 @@ export default function LoginPage({navigation}) {
                         </Button>
                     </YStack>
                     <YStack>
-                        <Button size="$5">
+                        <Button size="$5"
+                        onPress={()=>navigation.navigate("LoginPages")}>
                             Log In
                         </Button>
                     </YStack>

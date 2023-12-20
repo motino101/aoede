@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, SafeAreaView, ViewStyle, Animated, Easing, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Image, SafeAreaView, ViewStyle, Animated, Easing } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { languages, levels, scenarios } from '../constants/settings';
 import { TamaguiProvider, Input, Label, H6, H5, H4, H3, H2, H1, Button, TextArea, XStack, YStack } from 'tamagui'
@@ -14,53 +14,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import theme from '../styles/theme';
 
-const RegisterEmailPage = ({ navigation }) => {
-    return (
-        <RegisterField
-        id="registerEmail"
-            navigation={navigation}
-            question="What is your email?"
-            buttonText="Next"
-            number="2"
-            placeholder="Enter Email"
-            nextPage="RegisterPasswordPage"
-        />
-    )
-}
+const LoginPages = ({ navigation }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-const RegisterPasswordPage = ({ navigation }) => {
-    return (
-        <RegisterField
-        id="registerPassword"
-            navigation={navigation}
-            question="What is your password?"
-            buttonText="Complete"
-            number="3"
-            placeholder="Enter Password"
-            nextPage="LoginPage"
-        />
-    
-    )
-}
+    const handleLogin = () => {
+        // Handle login logic here
+    }
 
-const RegisterNamePage = ({ navigation }) => {
     return (
-        <RegisterField
-        id="registerName"
-            navigation={navigation}
-            question="What is your name?"
-            buttonText="Next"
-            number="1"
-            placeholder="Enter Full Name"
-            nextPage="RegisterEmailPage"
-            />
-    )
-}
-
-// Component same across all
-const RegisterField = ({ id, navigation, question, number, placeholder, buttonText, nextPage }) => {
-    return (
-
         <TamaguiProvider config={config}>
             <LinearGradient
                 colors={['#F7ADDF', '#BED7FC',]}
@@ -72,27 +34,31 @@ const RegisterField = ({ id, navigation, question, number, placeholder, buttonTe
                     <YStack style={{gap: theme.spacing.GapVL, justifyContent: 'space-between', flex: 1}}>
                         <YStack style = {{gap: theme.spacing.GapVXL}}>
                         <XStack style = {{justifyContent: 'space-between'}}>
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Ionicons name="chevron-back" size={24} color="black"/>
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <Ionicons name="chevron-back" size={24} color="black" />
                             </TouchableOpacity>
-                            
-                            <H5>{number}/3</H5>
+                            {/* <H5>Login</H5> */}
                         </XStack>
-                        {/* Question container */}
+                        {/* Email container */}
                         <YStack style={{gap: theme.spacing.GapVS}}>
-                            <H4>{question}</H4>
-                            <Input id={id} placeholder={placeholder} />
+                            <H4>Email</H4>
+                            <Input id="email" placeholder="Enter Email" value={email} onChangeText={setEmail} />
+                        </YStack>
+                        {/* Password container */}
+                        <YStack style={{gap: theme.spacing.GapVS}}>
+                            <H4>Password</H4>
+                            <Input id="password" placeholder="Enter Password" secureTextEntry value={password} onChangeText={setPassword} />
                         </YStack>
                         </YStack>
-                        {/* BUTTON */}
+                        {/* Login button */}
                         <YStack>
                             <Button size="$5"
                                 color="white"
                                 themeInverse={true}
                                 backgroundColor={'black'}
-                                onPress={() => navigation.navigate(nextPage)}
+                                onPress={handleLogin}
                             >
-                                {buttonText}
+                                Login
                             </Button>
                         </YStack>
                     </YStack>
@@ -106,7 +72,7 @@ const RegisterField = ({ id, navigation, question, number, placeholder, buttonTe
     );
 }
 
-export { RegisterNamePage, RegisterEmailPage, RegisterPasswordPage };
+export { LoginPages };
 
 const styles = StyleSheet.create({
     container: {
