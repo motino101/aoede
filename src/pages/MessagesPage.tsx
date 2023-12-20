@@ -12,7 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 const Stack = createStackNavigator();
 
 // __________________________________ MAIN APP __________________________________ 
-export default function FormPage({ navigation }) {
+export default function MessagesPage({ navigation }) {
     const [scenario, setScenario] = useState(''); // [scenario, setScenario] = useState('') -> [state, setState] = useState('' or 0 or false or [] or {} or null or undefined)
     const [language, setLanguage] = useState('');
     const [level, setLevel] = useState('');
