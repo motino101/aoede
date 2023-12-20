@@ -82,7 +82,7 @@ export default function FormPage({ navigation }) {
             >
                 <View style={styles.container}>
                     {/* HEADER */}
-                    <YStack>
+                    {/* <YStack>
                         <XStack style={{ justifyContent: 'center', alignItems: 'center', gap: 20, }}>
                             <Image
                                 source={require('../../assets/images/AIDI_TEXT_LOGO.png')}
@@ -90,7 +90,7 @@ export default function FormPage({ navigation }) {
                             />
                             <H3>Ask Aidi</H3>
                         </XStack>
-                    </YStack>
+                    </YStack> */}
                     {/* <XStack style={styles.header}>
                         
                     </XStack> */}
