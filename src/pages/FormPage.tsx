@@ -9,6 +9,7 @@ import Theme from '../styles/theme';
 import images from '../../assets/images';
 
 import { LinearGradient } from 'expo-linear-gradient';
+import LogoHeader from '../components/logoHeader';
 const Stack = createStackNavigator();
 
 // __________________________________ MAIN APP __________________________________ 
@@ -84,18 +85,8 @@ export default function FormPage({ navigation }) {
             >
                 <View style={styles.container}>
                     {/* HEADER */}
-                    {/* <YStack>
-                        <XStack style={{ justifyContent: 'center', alignItems: 'center', gap: 20, }}>
-                            <Image
-                                source={require('../../assets/images/AIDI_TEXT_LOGO.png')}
-                                style={{ width: 20, height: 20, resizeMode: 'contain', }}
-                            />
-                            <H3>Ask Aidi</H3>
-                        </XStack>
-                    </YStack> */}
-                    {/* <XStack style={styles.header}>
+                    <LogoHeader />
                         
-                    </XStack> */}
                     {/* INNER CONTAINER */}
                     <YStack style={styles.innerContainer}>
                         <Animated.View style={{ opacity: fadeAnim, position: 'relative', }}>
@@ -183,7 +174,7 @@ const styles = StyleSheet.create({
 
     overlay: {
         position: 'absolute',
-        bottom: 230,
+        bottom: 205,
         left: 115,
         zIndex: -1,
     },
