@@ -38,36 +38,30 @@ export default function App() {
   }
   console.log('Fonts loaded!');
 
+  function AuthStackScreen() {
+    return (
+      <Stack.Navigator initialRouteName="LoginPage" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="LoginPage" component={LoginPage} />
+        <Stack.Screen name="RegisterNamePage" component={RegisterNamePage} />
+        <Stack.Screen name="RegisterEmailPage" component={RegisterEmailPage} />
+        <Stack.Screen name="RegisterPasswordPage" component={RegisterPasswordPage} />
+        <Stack.Screen name="LoginPages" component={LoginPages} />
+      </Stack.Navigator>
+    );
+  }
 
   return (
     <NavigationContainer>
-      {
-        isAuthenticated ? (
-          <TabNav />
-        ) : (
-
-          <NavigationContainer independent={true}>
-            <Stack.Navigator initialRouteName="Form" screenOptions={{
-              headerShown: false,
-            }}>
-              <Stack.Screen name="LoginPage" component={LoginPage} />
-              <Stack.Screen name="RegisterNamePage" component={RegisterNamePage} />
-              <Stack.Screen name="RegisterEmailPage" component={RegisterEmailPage} />
-              <Stack.Screen name="RegisterPasswordPage" component={RegisterPasswordPage} />
-              <Stack.Screen name="LoginPages" component={LoginPages} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        )
-      }
+      {isAuthenticated ? <TabNav /> : <AuthStackScreen />}
     </NavigationContainer>
+    
   );
 
 }
 
 function TabNav() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator initialRouteName="Form"
+      <Tab.Navigator initialRouteName="Form" 
         screenOptions={({ route }) => ({
           headerShown: false,
           tabBarLabel: () => null,
@@ -103,14 +97,12 @@ function TabNav() {
         <Tab.Screen name="MessagesPage" component={MessagesPage} />
         <Tab.Screen name="ProfilePage" component={ProfilePage} />
       </Tab.Navigator>
-    </NavigationContainer>
 
   )
 }
 
 function ChatStack() {
   return (
-
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Form" screenOptions={{
         headerShown: false,

@@ -8,59 +8,105 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Theme from '../styles/theme';
 import images from '../../assets/images';
 import { initializeApp } from "firebase/app";
-import { Auth } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import theme from '../styles/theme';
 
+const createUser = (email: string, password: string) => {
+    return createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed up 
+            const user = userCredential.user;
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
+};
+
 const RegisterEmailPage = ({ navigation }) => {
+    const [email, setEmail] = useState('');
+
+    const handleNext = () => {
+        navigation.navigate('RegisterPasswordPage', { email });
+    };
+
     return (
         <RegisterField
-        id="registerEmail"
+            id="registerEmail"
             navigation={navigation}
             question="What is your email?"
             buttonText="Next"
             number="2"
             placeholder="Enter Email"
             nextPage="RegisterPasswordPage"
+            value={email}
+            onChangeText={setEmail}
+            onNext={handleNext}
         />
-    )
-}
+    );
+};
 
-const RegisterPasswordPage = ({ navigation }) => {
+const RegisterPasswordPage = ({ navigation, route }) => {
+    const [password, setPassword] = useState('');
+
+    const handleComplete = () => {
+        const { email } = route.params;
+        createUser(email, password)
+            .then(() => {
+                navigation.navigate('LoginPage');
+            })
+            .catch((error) => {
+                // Handle error
+            });
+    };
+
     return (
         <RegisterField
-        id="registerPassword"
+            id="registerPassword"
             navigation={navigation}
-            question="What is your password?"
+            question="Set a password!"
             buttonText="Complete"
             number="3"
             placeholder="Enter Password"
             nextPage="LoginPage"
+            value={password}
+            onChangeText={setPassword}
+            onNext={handleComplete}
         />
-    
-    )
-}
+    );
+};
 
 const RegisterNamePage = ({ navigation }) => {
+    const [name, setName] = useState('');
+
+    const handleNext = () => {
+        navigation.navigate('RegisterEmailPage', { name });
+    };
+
     return (
         <RegisterField
-        id="registerName"
+            id="registerName"
             navigation={navigation}
             question="What is your name?"
             buttonText="Next"
             number="1"
             placeholder="Enter Full Name"
             nextPage="RegisterEmailPage"
-            />
-    )
-}
+            value={name}
+            onChangeText={setName}
+            onNext={handleNext}
+        />
+    );
+};
 
 // Component same across all
-const RegisterField = ({ id, navigation, question, number, placeholder, buttonText, nextPage }) => {
+const RegisterField = ({ id, navigation, question, number, placeholder, buttonText, nextPage, value, onChangeText, onNext }) => {
     return (
-
         <TamaguiProvider config={config}>
             <LinearGradient
                 colors={['#F7ADDF', '#BED7FC',]}
@@ -69,20 +115,20 @@ const RegisterField = ({ id, navigation, question, number, placeholder, buttonTe
                 style={{ flex: 1 }}
             >
                 <SafeAreaView style={styles.container}>
-                    <YStack style={{gap: theme.spacing.GapVL, justifyContent: 'space-between', flex: 1}}>
-                        <YStack style = {{gap: theme.spacing.GapVXL}}>
-                        <XStack style = {{justifyContent: 'space-between'}}>
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Ionicons name="chevron-back" size={24} color="black"/>
-                            </TouchableOpacity>
-                            
-                            <H5>{number}/3</H5>
-                        </XStack>
-                        {/* Question container */}
-                        <YStack style={{gap: theme.spacing.GapVS}}>
-                            <H4>{question}</H4>
-                            <Input id={id} placeholder={placeholder} />
-                        </YStack>
+                    <YStack style={{ gap: theme.spacing.GapVL, justifyContent: 'space-between', flex: 1 }}>
+                        <YStack style={{ gap: theme.spacing.GapVXL }}>
+                            <XStack style={{ justifyContent: 'space-between' }}>
+                                <TouchableOpacity onPress={() => navigation.goBack()}>
+                                    <Ionicons name="chevron-back" size={24} color="black" />
+                                </TouchableOpacity>
+
+                                <H5>{number}/3</H5>
+                            </XStack>
+                            {/* Question container */}
+                            <YStack style={{ gap: theme.spacing.GapVS }}>
+                                <H4>{question}</H4>
+                                <Input id={id} placeholder={placeholder} value={value} onChangeText={onChangeText} />
+                            </YStack>
                         </YStack>
                         {/* BUTTON */}
                         <YStack>
@@ -90,7 +136,7 @@ const RegisterField = ({ id, navigation, question, number, placeholder, buttonTe
                                 color="white"
                                 themeInverse={true}
                                 backgroundColor={'black'}
-                                onPress={() => navigation.navigate(nextPage)}
+                                onPress={onNext}
                             >
                                 {buttonText}
                             </Button>
@@ -102,9 +148,8 @@ const RegisterField = ({ id, navigation, question, number, placeholder, buttonTe
             </LinearGradient>
 
         </TamaguiProvider>
-
     );
-}
+};
 
 export { RegisterNamePage, RegisterEmailPage, RegisterPasswordPage };
 
