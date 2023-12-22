@@ -21,7 +21,7 @@ const AuthStack = createStackNavigator();
 
 export default function App() {
   // AUTHENTICATE APP
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const handleLogin = () => {
     setIsAuthenticated(true);

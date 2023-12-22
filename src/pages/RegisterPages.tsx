@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Theme from '../styles/theme';
 import images from '../../assets/images';
 import { initializeApp } from "firebase/app";
-import { auth } from '../../firebaseConfig';
+import { auth } from '../apis/configs/firebaseConfig';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
