@@ -1,6 +1,7 @@
 module.exports = {
     // Your Jest configurations
-    testEnvironment: "node",
+    // testEnvironment: "node",
     // Other configurations as needed
-  };
+    testEnvironment: 'jsdom',
+};
   

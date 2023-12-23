@@ -4,12 +4,17 @@ import { getDatabase, ref, child, get, onValue } from "firebase/database";
 
 // Get users's saved messages. returns structure: { m1: {"Content":..., "Language":..., "Level":...}, m2: ... })
 function getUserSavedMessages(uid) {
-    const userMessagesRef = ref(database, `userSavedMessages/${uid}`);
-    onValue(userMessagesRef, (snapshot) => {
-        const data = snapshot.val();
-        return data;
+    return new Promise((resolve, reject) => {
+        const userMessagesRef = ref(database, `userSavedMessages/${uid}`);
+        onValue(userMessagesRef, (snapshot) => {
+            const data = snapshot.val();
+            resolve(data); // Resolve the promise with the data
+        }, (error) => {
+            reject(error); // Reject the promise if there's an error
+        });
     });
 }
+
 
 // Get users's saved convos
 
