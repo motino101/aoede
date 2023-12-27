@@ -6,7 +6,8 @@ import {
   assertSucceeds,
 } from "@firebase/rules-unit-testing";
 import fs from "fs";
-import { getUserSavedMessages } from "../apis/msgConvoAPI";
+import { getUserSavedMessages, getUserConversations } from "../apis/msgConvoAPI";
+
 
 // Initialize the test environment
 let testEnv;
@@ -34,14 +35,15 @@ describe('Realtime Database messages tests', () => {
             }
         };
 
-        // Seed the database emulator with mock data
-        await testEnv.withSecurityRulesDisabled(async (context) => {
-            const adminDb = context.database();
-            await adminDb.ref(`userSavedMessages/${uid}`).set(mockData);
-        });
+        // // Seed the database emulator with mock data
+        // await testEnv.withSecurityRulesDisabled(async (context) => {
+        //     const adminDb = context.database();
+        //     await adminDb.ref(`userSavedMessages/${uid}`).set(mockData);
+        // });
 
         // Test the getUserSavedMessages API function
-        await assertSucceeds(getUserSavedMessages(uid).then(data => {
+        await assertSucceeds(
+            getUserSavedMessages(uid).then(data => {
             expect(data).toEqual(mockData);
         }));
 
@@ -50,6 +52,32 @@ describe('Realtime Database messages tests', () => {
     });
 
     // Additional tests can be added here
+    test('retrieves saved conversations correctly', async () => {
+        const uid = 'userId_1';
+        const mockData = {
+            conversationId_1: {
+                "Saved": true,
+                "Scenario": "Ordering food",
+                "Language": "English",
+                "Level": "Beginner",
+            }
+        };
+
+        // // Seed the database emulator with mock data
+        // await testEnv.withSecurityRulesDisabled(async (context) => {
+        //     const adminDb = context.database();
+        //     await adminDb.ref(`userSavedConversations/${uid}`).set(mockData);
+        // });
+
+        // Test the getUserSavedMessages API function
+        await assertSucceeds(
+            getUserConversations(uid).then(data => {
+            expect(data).toEqual(mockData);
+        }));
+
+        // Test read operation
+        await assertSucceeds(testEnv.unauthenticatedContext().database().ref(`userSavedConversations/${uid}`).get());
+    });
 });
 
 // Clean up after all tests are done

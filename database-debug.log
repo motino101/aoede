@@ -1,13 +1,22 @@
-17:21:17.501 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-17:21:17.596 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
-18:01:49.283 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - aoede-f00ec successfully activated FBKV (SurveyIdle(0)) wait: 77ms, init: 0ms
-21:36:26.611 [NamespaceSystem-blocking-namespace-operation-dispatcher-55] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:36:34.815 [NamespaceSystem-blocking-namespace-operation-dispatcher-60] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:37:20.808 [NamespaceSystem-blocking-namespace-operation-dispatcher-61] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:37:34.835 [NamespaceSystem-blocking-namespace-operation-dispatcher-63] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:37:43.164 [NamespaceSystem-blocking-namespace-operation-dispatcher-65] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:38:05.038 [NamespaceSystem-blocking-namespace-operation-dispatcher-66] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:45:34.677 [NamespaceSystem-blocking-namespace-operation-dispatcher-69] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:48:28.426 [NamespaceSystem-blocking-namespace-operation-dispatcher-74] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:50:35.962 [NamespaceSystem-blocking-namespace-operation-dispatcher-77] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
-21:54:11.238 [NamespaceSystem-blocking-namespace-operation-dispatcher-82] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:04:49.219 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+23:04:49.313 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
+23:04:52.816 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO com.firebase.core.namespace.NamespaceActor - aoede-f00ec successfully activated FBKV (SurveyIdle(0)) wait: 73ms, init: 0ms
+23:04:52.854 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:05:03.410 [NamespaceSystem-blocking-namespace-operation-dispatcher-10] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:03:52.812 [NamespaceSystem-blocking-namespace-operation-dispatcher-15] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:04:35.444 [NamespaceSystem-blocking-namespace-operation-dispatcher-21] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:06:12.459 [NamespaceSystem-blocking-namespace-operation-dispatcher-22] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:06:56.453 [NamespaceSystem-blocking-namespace-operation-dispatcher-24] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:07:18.951 [NamespaceSystem-blocking-namespace-operation-dispatcher-25] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:07:40.166 [NamespaceSystem-blocking-namespace-operation-dispatcher-27] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:08:23.774 [NamespaceSystem-blocking-namespace-operation-dispatcher-29] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:11:02.790 [NamespaceSystem-blocking-namespace-operation-dispatcher-31] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:11:37.132 [NamespaceSystem-blocking-namespace-operation-dispatcher-37] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:11:57.806 [NamespaceSystem-blocking-namespace-operation-dispatcher-39] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:12:16.051 [NamespaceSystem-blocking-namespace-operation-dispatcher-40] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:12:50.962 [NamespaceSystem-blocking-namespace-operation-dispatcher-42] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:13:05.338 [NamespaceSystem-blocking-namespace-operation-dispatcher-44] INFO com.firebase.core.namespace.StateManager - Namespace aoede-f00ec status Active to Active
+23:13:10.740 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
+23:13:10.758 [NamespaceSystem-akka.actor.default-dispatcher-35] INFO com.firebase.core.namespace.Terminator$Terminator - 1 actors left to terminate: aoede-f00ec
+23:13:10.769 [NamespaceSystem-akka.actor.default-dispatcher-14] INFO com.firebase.core.namespace.NamespaceActor - stopped namespace actor for aoede-f00ec
+23:13:10.775 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.

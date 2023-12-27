@@ -15,8 +15,19 @@ function getUserSavedMessages(uid) {
     });
 }
 
-
 // Get users's saved convos
+function getUserConversations(uid) {
+    return new Promise((resolve, reject) => {
+        const userConvosRef = ref(database, `userConversationHistory/${uid}`);
+        onValue(userConvosRef, (snapshot) => {
+            const data = snapshot.val();
+            resolve(data); // Resolve the promise with the data
+        }, (error) => {
+            reject(error); // Reject the promise if there's an error
+        });
+    })
+}
+
 
 // Get user's convo history
 
@@ -24,4 +35,4 @@ function getUserSavedMessages(uid) {
 
 // Get conversation info
 
-export { getUserSavedMessages };
+export { getUserSavedMessages, getUserConversations };

@@ -145,7 +145,7 @@ export default function FormPage({ navigation }) {
                         <Button size="$5"
                             // active={{ backgroundColor: 'white' }}
                             color="white"
-                            themeInverse={true}
+                            // themeInverse={true}
                             backgroundColor={'black'}
                             onPress={handleSubmit}>
                             Start Chat
